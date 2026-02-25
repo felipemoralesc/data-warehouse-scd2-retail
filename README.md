@@ -1,32 +1,48 @@
 # data-warehouse-scd2-retail
 Proyecto de almacén de datos de extremo a extremo con implementación SCD tipo 2 utilizando PostgreSQL.
-# Proyecto Data Warehouse – Implementación SCD Tipo 2
+# Data Warehouse Retail – Implementación SCD Tipo 2
 
-## 📌 Descripción del Proyecto
+## 📌 Visión General
 
 Este proyecto implementa un Data Warehouse en PostgreSQL simulando un entorno de ventas retail.
 
-Se desarrolla un pipeline básico de datos desde la capa Raw hasta el Data Warehouse (DW), aplicando modelado dimensional y gestión histórica mediante Slowly Changing Dimensions (SCD Tipo 2).
+Se diseña un pipeline de datos estructurado por capas (Raw → Staging → DW), aplicando modelado dimensional y gestión histórica mediante Slowly Changing Dimensions (SCD Tipo 2).
+
+El objetivo es garantizar:
+
+- Consistencia histórica
+- Separación de responsabilidades por capa
+- Integridad de métricas
+- Escalabilidad analítica
 
 ---
 
-## 🏗 Arquitectura del Proyecto
+## 🏗 Arquitectura de Datos
 
-El proyecto sigue una arquitectura por capas:
+El proyecto sigue una arquitectura clásica de Data Warehousing:
 
-- **Raw** → Archivos CSV originales
-- **Staging** → Limpieza y estructuración de datos
-- **Data Warehouse (DW)** → Modelo dimensional tipo Star Schema
 
----
+Fuentes (CSV)
+↓
+Raw Layer
+↓
+Staging Layer
+↓
+Data Warehouse (Star Schema)
 
-## 🔄 Flujo de Datos (Pipeline)
 
-1. Los datos fuente se almacenan en la capa **Raw**
-2. Un script en **Python** carga los datos hacia la base de datos
-3. La capa **Staging** normaliza y prepara la información
-4. El **Data Warehouse** implementa modelo dimensional con SCD Tipo 2
-5. La tabla de hechos almacena métricas listas para análisis
+### 🔹 Raw
+Almacena archivos fuente sin transformación.
+
+### 🔹 Staging
+Normaliza, tipifica y prepara los datos para su modelado dimensional.
+
+### 🔹 Data Warehouse
+Implementa modelo estrella con:
+
+- Dimensiones históricas (SCD Tipo 2)
+- Tabla de hechos granular
+- Claves sustitutas
 
 ---
 
@@ -36,71 +52,120 @@ El proyecto sigue una arquitectura por capas:
 
 - `dim_producto` → SCD Tipo 2
 - `dim_cliente` → SCD Tipo 2
-- `dim_fecha` → Dimensión estática
+- `dim_fecha` → Dimensión calendario
 
-### Tabla de Hechos
+Características:
 
-- `fact_ventas_detalle`
-  - Usa claves sustitutas
-  - Preserva consistencia histórica
-  - Implementa columna generada para cálculo automático del total
+- Uso de surrogate keys
+- Control de vigencia con:
+  - `fecha_inicio_vigencia`
+  - `fecha_fin_vigencia`
+  - `es_actual`
+- Preservación total de historial
+
+---
+
+## 📊 Tabla de Hechos – `fact_ventas_detalle`
+
+Nivel de granularidad:
+
+Una fila por producto vendido en una transacción.
+
+Campos principales:
+
+- clave_producto
+- clave_cliente
+- clave_fecha
+- cantidad
+- precio_unitario
+- total_venta (columna generada)
+
+### 🧮 Decisión de diseño
+
+`total_venta` se define como columna generada:
+
+cantidad * precio_unitario
+
+Esto garantiza:
+
+- Integridad matemática
+- Eliminación de inconsistencias
+- Simplificación del ETL
 
 ---
 
 ## 🔁 Implementación SCD Tipo 2
 
-Las dimensiones de producto y cliente incluyen:
+Cada cambio en atributos relevantes de producto o cliente genera:
 
-- Clave sustituta (surrogate key)
-- Clave natural del negocio
-- `fecha_inicio_vigencia`
-- `fecha_fin_vigencia`
-- `es_actual`
+1. Cierre del registro anterior (`fecha_fin_vigencia`)
+2. Inserción de nueva versión
+3. Actualización de indicador `es_actual`
 
-Cada cambio relevante genera una nueva versión del registro, preservando el historial.
+Esto permite análisis históricos coherentes incluso ante cambios de precio o atributos del cliente.
 
 ---
 
-## 🧮 Diseño de la Tabla de Hechos
-
-Campos principales:
-
-- `cantidad`
-- `precio_unitario`
-- `total_venta` (columna generada)
-
-El total se calcula automáticamente:
-
-cantidad * precio_unitario
-
-Esto evita inconsistencias y asegura integridad de datos.
-
----
-
-## 🛠 Tecnologías Utilizadas
+## 🛠 Stack Tecnológico
 
 - PostgreSQL
 - SQL
-- Python
+- Python (carga de datos desde Raw)
 - Modelado Dimensional
-- Slowly Changing Dimensions (SCD Tipo 2)
+- Slowly Changing Dimensions
+
+El script en Python automatiza la carga inicial desde archivos CSV hacia la base de datos.
 
 ---
 
-## 📊 Capacidades Analíticas
+## 📂 Estructura del Repositorio
 
-El modelo permite:
 
-- Análisis histórico de ventas
-- Seguimiento de cambios de precios
-- Seguimiento de cambios de clientes
-- Agregaciones por fecha, producto y cliente
+data-warehouse-scd2-retail/
+│
+├── README.md
+├── raw/
+├── staging/
+│ └── staging_tables.sql
+├── dw/
+│ ├── dim_producto.sql
+│ ├── dim_cliente.sql
+│ ├── dim_fecha.sql
+│ ├── fact_ventas_detalle.sql
+│ └── scd2_logic.sql
+└── docs/
+└── star_schema.png
+
 
 ---
 
-## 🚀 Próximos Pasos
+## ⚙ Cómo Ejecutar el Proyecto
 
-- Automatización completa del ETL
-- Implementación de control de calidad de datos
-- Indexación y optimización de consultas
-- Creación de vistas analíticas
+1. Crear base de datos en PostgreSQL
+2. Ejecutar scripts de Staging
+3. Ejecutar scripts de Dimensiones
+4. Ejecutar lógica SCD Tipo 2
+5. Cargar tabla de hechos
+6. Ejecutar consultas analíticas
+
+---
+
+## 🚀 Posibles Mejoras Futuras
+
+- Automatización completa del pipeline
+- Orquestación (Airflow o similar)
+- Implementación de pruebas de calidad de datos
+- Indexación avanzada
+- Particionamiento de tabla de hechos
+
+---
+
+## 🎯 Objetivo Profesional
+
+Este proyecto demuestra:
+
+- Conocimiento de arquitectura de datos
+- Implementación de SCD Tipo 2
+- Diseño de modelo estrella
+- Buenas prácticas de modelado
+- Separación clara de capas
