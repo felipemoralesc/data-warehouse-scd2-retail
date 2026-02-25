@@ -124,7 +124,6 @@ El script en Python automatiza la carga inicial desde archivos CSV hacia la base
 data-warehouse-scd2-retail/
 │
 ├── README.md
-├── README.md
 ├── raw/
 ├── staging/
 │ └── staging_tables.sql
