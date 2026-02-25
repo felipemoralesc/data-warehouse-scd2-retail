@@ -1,0 +1,1 @@
+-- Script de creación de tablas staging
