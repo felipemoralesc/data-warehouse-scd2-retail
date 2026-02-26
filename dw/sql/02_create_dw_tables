@@ -1,1 +1,25 @@
+-- Table: dw.dim_cliente
+
+-- DROP TABLE IF EXISTS dw.dim_cliente;
+
+CREATE TABLE IF NOT EXISTS dw.dim_cliente
+(
+    clave_cliente integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
+    cliente_id integer NOT NULL,
+    email_cliente character varying(150) COLLATE pg_catalog."default",
+    nombre character varying(100) COLLATE pg_catalog."default",
+    apellido character varying(100) COLLATE pg_catalog."default",
+    ciudad character varying(100) COLLATE pg_catalog."default",
+    fecha_inicio_vigencia date NOT NULL,
+    fecha_fin_vigencia date,
+    es_actual boolean NOT NULL,
+    CONSTRAINT dim_cliente_pkey PRIMARY KEY (clave_cliente),
+    CONSTRAINT uq_cliente_version UNIQUE (cliente_id, fecha_inicio_vigencia)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS dw.dim_cliente
+    OWNER to postgres;
+---------------------------------------------------------------------------------------------------
 
