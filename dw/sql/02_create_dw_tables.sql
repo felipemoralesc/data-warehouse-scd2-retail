@@ -1,39 +1,39 @@
--- Table: dw.dim_cliente
+-- Tabla: dw.dim_cliente
 
--- DROP TABLE IF EXISTS dw.dim_cliente;
+-- ELIMINAR TABLA SI EXISTE dw.dim_cliente;
 
-CREATE TABLE IF NOT EXISTS dw.dim_cliente
+CREAR TABLA SI NO EXISTE dw.dim_cliente
 (
-    clave_cliente integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
-    cliente_id integer NOT NULL,
-    email_cliente character varying(150) COLLATE pg_catalog."default",
-    nombre character varying(100) COLLATE pg_catalog."default",
-    apellido character varying(100) COLLATE pg_catalog."default",
-    ciudad character varying(100) COLLATE pg_catalog."default",
-    fecha_inicio_vigencia date NOT NULL,
-    fecha_fin_vigencia date,
-    es_actual boolean NOT NULL,
-    CONSTRAINT dim_cliente_pkey PRIMARY KEY (clave_cliente),
-    CONSTRAINT uq_cliente_version UNIQUE (cliente_id, fecha_inicio_vigencia)
+ clave_cliente entero NO NULO GENERADO SIEMPRE COMO IDENTIDAD ( INCREMENTO 1 INICIO 1 VALOR MÍNIMO 1 VALOR MÁXIMO 2147483647 CACHÉ 1 ),1 INICIO 1 VALOR MÍNIMO 1 VALOR MÁXIMO 2147483647 CACHÉ 1 ),
+ cliente_id entero NO NULO,
+ carácter email_cliente variable (150) COTEJAR pg_catalog."predeterminado",
+ nombre carácter variable(100) COTEJAR pg_catalog."predeterminado",
+ variable carácter apellido (100) COTEJAR pg_catalog."predeterminado",100) COTEJAR pg_catalog."predeterminado",
+ variable de cochecter de ciudad (100) COTEJAR pg_catalog."predeterminado",
+ fecha de fecha_inicio_vigilancia NO NULA,
+ fecha de fecha_fin_vigilancia,
+ es_actual booleano NO NULO,
+ RESTRICCIÓN dim_cliente_pkey CLAVE PRIMARIA (clave_cliente),
+ RESTRICCIÓN uq_cliente_version ÚNICA (cliente_id, fecha_inicio_vigilancia)
 )
 
-TABLESPACE pg_default;
+ESPACIO DE TABLAS pg_default;
 
-ALTER TABLE IF EXISTS dw.dim_cliente
-    OWNER to postgres;
----------------------------------------------------------------------------------------------------
+ALTERAR TABLA SI EXISTE dw.dim_cliente
+ PROPIETARIO de postgres;
+------------------
 
--- Table: dw.dim_fecha
+-- Tabla: dw.dim_fecha
 
--- DROP TABLE IF EXISTS dw.dim_fecha;
+-- ELIMINAR TABLA SI EXISTE dw.dim_fecha;
 
-CREATE TABLE IF NOT EXISTS dw.dim_fecha
+CREAR TABLA SI NO EXISTE dw.dim_fecha
 (
-    clave_fecha integer NOT NULL DEFAULT nextval('dw.dim_fecha_clave_fecha_seq'::regclass),
-    fecha_completa date NOT NULL,
-    anio integer NOT NULL,
-    trimestre integer NOT NULL,
-    mes integer NOT NULL,
+ clave_fecha entero NO NULO PREDETERMINADO nextval('dw.dim_fecha_clave_fecha_seq'::regclass),
+ fecha de fecha_completa NO NULA,
+ entero anio NO NULO,
+ trimestre entero NO NULO,
+ mes entero NO NULO,
     nombre_mes character varying(20) COLLATE pg_catalog."default" NOT NULL,
     dia integer NOT NULL,
     nombre_dia_semana character varying(20) COLLATE pg_catalog."default" NOT NULL,
