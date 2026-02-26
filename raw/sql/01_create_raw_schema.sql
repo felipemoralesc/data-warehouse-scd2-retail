@@ -1,1 +1,6 @@
+-- SCHEMA: raw
 
+-- DROP SCHEMA IF EXISTS "raw" ;
+
+CREATE SCHEMA IF NOT EXISTS "raw"
+    AUTHORIZATION postgres;
