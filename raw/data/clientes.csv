@@ -1,0 +1,11 @@
+﻿cliente_id,email,nombre,apellido,ciudad,fecha_registro
+1,juan.perez@gmail.com,Juan,Perez,Bogotá,2023-01-15
+2,maria.gomez@gmail.com,Maria,Gomez,Medellín,2023-02-20
+3,carlos.rodriguez@gmail.com,Carlos,Rodriguez,Cali,2023-03-10
+4,laura.martinez@gmail.com,Laura,Martinez,Barranquilla,2023-04-05
+5,andres.lopez@gmail.com,Andres,Lopez,Bucaramanga,2023-05-18
+6,sofia.hernandez@gmail.com,Sofia,Hernandez,Cartagena,2023-06-22
+7,david.torres@gmail.com,David,Torres,Bogotá,2023-07-30
+8,camila.ramirez@gmail.com,Camila,Ramirez,Medellín,2023-08-12
+9,jose.morales@gmail.com,Jose,Morales,Cali,2023-09-03
+10,valentina.castillo@gmail.com,Valentina,Castillo,Bogotá,2023-10-14
