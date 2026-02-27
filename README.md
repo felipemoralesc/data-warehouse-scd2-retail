@@ -2,6 +2,7 @@ data-warehouse-scd2-retail
 
 Proyecto de Data Warehouse end-to-end con implementación de Slowly Changing Dimensions (SCD Tipo 2) utilizando PostgreSQL y Python.
 
+
 📌 Visión General
 
 Este proyecto implementa un Data Warehouse simulando un entorno de ventas retail.
@@ -20,6 +21,7 @@ Separación clara de responsabilidades
 
 Buenas prácticas de ingeniería de datos
 
+
 🏗 Arquitectura
 
 Fuentes CSV
@@ -29,6 +31,7 @@ Raw Layer
 Staging Layer
 ↓
 Data Warehouse (Modelo Estrella)
+
 
 🔹 Raw Layer
 
@@ -46,6 +49,7 @@ raw/
    data/
    sql/
    scripts/
+
 🔹 Staging Layer
 
 Conversión de tipos
@@ -56,10 +60,12 @@ Limpieza básica
 
 Preparación para modelo dimensional
 
+
 Estructura:
 
 staging/
    sql/
+
 🔹 Data Warehouse Layer
 
 Modelo estrella compuesto por:
@@ -139,16 +145,22 @@ data-warehouse-scd2-retail/
 ├── .gitignore
 ├── requirements.txt
 └── README.md
+
 ⚙ Cómo Ejecutar el Proyecto
+
 1️⃣ Clonar el repositorio
+
 2️⃣ Crear archivo .env en la raíz:
+
 DB_HOST=localhost
 DB_NAME=ventas_dw
 DB_USER=postgres
 DB_PASSWORD=tu_password
 DB_PORT=5432
+
 3️⃣ Instalar dependencias
 pip install -r requirements.txt
+
 4️⃣ Ejecutar en orden:
 
 Crear base de datos
@@ -165,10 +177,12 @@ Ejecutar script de dim_fecha
 
 Poblar tabla de hechos
 
+
 🔐 Seguridad
 
 Las credenciales de conexión no están almacenadas en el código.
 Se gestionan mediante variables de entorno y .env.
+
 
 🚀 Posibles Mejoras Futuras
 
@@ -183,6 +197,7 @@ Particionamiento
 Dockerización
 
 CI/CD
+
 
 🎯 Objetivo Profesional
 
