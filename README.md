@@ -1,171 +1,201 @@
-# data-warehouse-scd2-retail
-Proyecto de almacén de datos de extremo a extremo con implementación SCD tipo 2 utilizando PostgreSQL.
-# Data Warehouse Retail – Implementación SCD Tipo 2
+data-warehouse-scd2-retail
 
-## 📌 Visión General
+Proyecto de Data Warehouse end-to-end con implementación de Slowly Changing Dimensions (SCD Tipo 2) utilizando PostgreSQL y Python.
 
-Este proyecto implementa un Data Warehouse en PostgreSQL simulando un entorno de ventas retail.
+📌 Visión General
 
-Se diseña un pipeline de datos estructurado por capas (Raw → Staging → DW), aplicando modelado dimensional y gestión histórica mediante Slowly Changing Dimensions (SCD Tipo 2).
+Este proyecto implementa un Data Warehouse simulando un entorno de ventas retail.
 
-El objetivo es garantizar:
+Se construye un pipeline estructurado por capas:
 
-- Consistencia histórica
-- Separación de responsabilidades por capa
-- Integridad de métricas
-- Escalabilidad analítica
+Raw → Staging → Data Warehouse
 
----
+Aplicando:
 
-## 🏗 Arquitectura de Datos
+Modelado dimensional
 
-El proyecto sigue una arquitectura clásica de Data Warehousing:
+Gestión histórica (SCD Tipo 2)
 
+Separación clara de responsabilidades
 
-Fuentes (CSV)
+Buenas prácticas de ingeniería de datos
+
+🏗 Arquitectura
+
+Fuentes CSV
 ↓
 Raw Layer
 ↓
 Staging Layer
 ↓
-Data Warehouse (Star Schema)
+Data Warehouse (Modelo Estrella)
 
+🔹 Raw Layer
 
-### 🔹 Raw
-Almacena archivos fuente sin transformación.
+Almacena datos fuente sin transformación.
 
-### 🔹 Staging
-Normaliza, tipifica y prepara los datos para su modelado dimensional.
+Tablas espejo de los archivos CSV.
 
-### 🔹 Data Warehouse
-Implementa modelo estrella con:
+Scripts Python para carga automatizada.
 
-- Dimensiones históricas (SCD Tipo 2)
-- Tabla de hechos granular
-- Claves sustitutas
+Uso de variables de entorno (.env).
 
----
+Estructura:
 
-## ⭐ Modelo Dimensional
+raw/
+   data/
+   sql/
+   scripts/
+🔹 Staging Layer
 
-### Dimensiones
+Conversión de tipos
 
-- `dim_producto` → SCD Tipo 2
-- `dim_cliente` → SCD Tipo 2
-- `dim_fecha` → Dimensión calendario
+Normalización de datos
 
-Características:
+Limpieza básica
 
-- Uso de surrogate keys
-- Control de vigencia con:
-  - `fecha_inicio_vigencia`
-  - `fecha_fin_vigencia`
-  - `es_actual`
-- Preservación total de historial
+Preparación para modelo dimensional
 
----
+Estructura:
 
-## 📊 Tabla de Hechos – `fact_ventas_detalle`
+staging/
+   sql/
+🔹 Data Warehouse Layer
 
-Nivel de granularidad:
+Modelo estrella compuesto por:
 
-Una fila por producto vendido en una transacción.
+Dimensiones
 
-Campos principales:
+dim_cliente (SCD Tipo 2)
 
-- clave_producto
-- clave_cliente
-- clave_fecha
-- cantidad
-- precio_unitario
-- total_venta (columna generada)
+dim_producto (SCD Tipo 2)
 
-### 🧮 Decisión de diseño
+dim_fecha (generada automáticamente)
 
-`total_venta` se define como columna generada:
+Tabla de Hechos
 
-cantidad * precio_unitario
+fact_ventas_detalle
 
-Esto garantiza:
+Incluye:
 
-- Integridad matemática
-- Eliminación de inconsistencias
-- Simplificación del ETL
+Claves sustitutas
 
----
+Columna generada total_venta
 
-## 🔁 Implementación SCD Tipo 2
+Control de vigencia histórica
 
-Cada cambio en atributos relevantes de producto o cliente genera:
+Indicador es_actual
 
-1. Cierre del registro anterior (`fecha_fin_vigencia`)
-2. Inserción de nueva versión
-3. Actualización de indicador `es_actual`
+🔁 Implementación SCD Tipo 2
 
-Esto permite análisis históricos coherentes incluso ante cambios de precio o atributos del cliente.
+Cada cambio relevante genera:
 
----
+Cierre del registro anterior
 
-## 🛠 Stack Tecnológico
+Inserción de nueva versión
 
-- PostgreSQL
-- SQL
-- Python (carga de datos desde Raw)
-- Modelado Dimensional
-- Slowly Changing Dimensions
+Control de fechas de vigencia
 
-El script en Python automatiza la carga inicial desde archivos CSV hacia la base de datos.
+Preservación total del historial
 
----
+🛠 Stack Tecnológico
 
-## 📂 Estructura del Repositorio
+PostgreSQL
 
+SQL
 
+Python
+
+pandas
+
+SQLAlchemy
+
+psycopg2
+
+python-dotenv
+
+Modelado Dimensional
+
+📂 Estructura del Repositorio
 data-warehouse-scd2-retail/
 │
-├── README.md
 ├── raw/
+│   ├── data/
+│   ├── sql/
+│   ├── scripts/
+│   └── README.md
+│
 ├── staging/
-│ └── staging_tables.sql
+│   ├── sql/
+│   └── README.md
+│
 ├── dw/
-│ ├── dim_producto.sql
-│ ├── dim_cliente.sql
-│ ├── dim_fecha.sql
-│ ├── fact_ventas_detalle.sql
-│ └── scd2_logic.sql
-└── docs/
-└── star_schema.png
+│   ├── sql/
+│   ├── scripts/
+│   └── README.md
+│
+├── docs/
+│
+├── .gitignore
+├── requirements.txt
+└── README.md
+⚙ Cómo Ejecutar el Proyecto
+1️⃣ Clonar el repositorio
+2️⃣ Crear archivo .env en la raíz:
+DB_HOST=localhost
+DB_NAME=ventas_dw
+DB_USER=postgres
+DB_PASSWORD=tu_password
+DB_PORT=5432
+3️⃣ Instalar dependencias
+pip install -r requirements.txt
+4️⃣ Ejecutar en orden:
 
+Crear base de datos
 
----
+Ejecutar SQL de Raw
 
-## ⚙ Cómo Ejecutar el Proyecto
+Ejecutar scripts de carga Raw
 
-1. Crear base de datos en PostgreSQL
-2. Ejecutar scripts de Staging
-3. Ejecutar scripts de Dimensiones
-4. Ejecutar lógica SCD Tipo 2
-5. Cargar tabla de hechos
-6. Ejecutar consultas analíticas
+Ejecutar SQL de Staging
 
----
+Ejecutar SQL de DW
 
-## 🚀 Posibles Mejoras Futuras
+Ejecutar script de dim_fecha
 
-- Automatización completa del pipeline
-- Orquestación (Airflow o similar)
-- Implementación de pruebas de calidad de datos
-- Indexación avanzada
-- Particionamiento de tabla de hechos
+Poblar tabla de hechos
 
----
+🔐 Seguridad
 
-## 🎯 Objetivo Profesional
+Las credenciales de conexión no están almacenadas en el código.
+Se gestionan mediante variables de entorno y .env.
+
+🚀 Posibles Mejoras Futuras
+
+Orquestación del pipeline
+
+Validaciones de calidad de datos
+
+Índices y optimización
+
+Particionamiento
+
+Dockerización
+
+CI/CD
+
+🎯 Objetivo Profesional
 
 Este proyecto demuestra:
 
-- Conocimiento de arquitectura de datos
-- Implementación de SCD Tipo 2
-- Diseño de modelo estrella
-- Buenas prácticas de modelado
-- Separación clara de capas
+Diseño de arquitectura de datos
+
+Implementación SCD Tipo 2
+
+Modelado estrella
+
+Separación por capas
+
+Buenas prácticas de ingeniería
+
+Gestión segura de credenciales
