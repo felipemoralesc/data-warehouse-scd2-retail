@@ -1,4 +1,5 @@
 🏛 Data Warehouse Layer (DW)
+
 📌 Descripción
 
 La carpeta dw contiene la capa dimensional del proyecto data-warehouse-scd2-retail.
@@ -31,6 +32,7 @@ dw/
 │   └── script_para_cargar_dim_fecha.py
 │
 └── README.md
+
 🗄 Carpeta /sql
 
 Contiene los scripts DDL necesarios para crear y optimizar la estructura del Data Warehouse.
@@ -40,6 +42,7 @@ Contiene los scripts DDL necesarios para crear y optimizar la estructura del Dat
 Crea el schema del Data Warehouse:
 
 CREATE SCHEMA IF NOT EXISTS dw;
+
 2️⃣ 02_create_dw_tables.sql
 
 Incluye la creación de:
@@ -52,6 +55,7 @@ dim_producto
 
 dim_fecha
 
+
 📌 Tabla de hechos
 
 fact_ventas_detalle
@@ -61,6 +65,7 @@ La tabla de hechos implementa una columna calculada:
 total_venta NUMERIC(12,2)
 GENERATED ALWAYS AS ((cantidad::NUMERIC * precio_unitario)) STORED
 
+
 🔎 Esto garantiza:
 
 Integridad de datos
@@ -69,9 +74,11 @@ Eliminación de redundancia
 
 Cálculo automático a nivel de base de datos
 
+
 3️⃣ 03_create_dw_indexes.sql
 
 Define los índices estratégicos para optimizar el rendimiento del modelo dimensional.
+
 
 🎯 Objetivo de la indexación
 
@@ -84,6 +91,7 @@ Filtros analíticos por cliente, producto y fecha
 Consultas SCD Tipo 2 (registro actual e histórico)
 
 Consultas por rango de fechas
+
 
 📌 Índices en tabla de hechos
 
@@ -101,6 +109,7 @@ SELECT *
 FROM dw.fact_ventas_detalle f
 JOIN dw.dim_cliente c 
   ON f.clave_cliente = c.clave_cliente;
+
 📌 Índices en dimensiones SCD Tipo 2
 
 Se implementan índices compuestos para optimizar:
@@ -119,6 +128,7 @@ Optimiza consultas del tipo:
 
 WHERE id_cliente_natural = 1001
 AND es_actual = true;
+
 📌 Índice en dimensión fecha
 
 Se crea índice sobre:
@@ -128,11 +138,13 @@ fecha
 Optimiza filtros por rango:
 
 WHERE fecha BETWEEN '2024-01-01' AND '2024-12-31';
+
 📅 Dimensión Fecha (dim_fecha)
 
 La dimensión fecha se genera mediante un script en Python ubicado en:
 
 dw/script/script_para_cargar_dim_fecha.py
+
 🔧 Características del script
 
 Genera fechas desde 2020-01-01 hasta 2030-12-31
@@ -155,6 +167,7 @@ Nombre del día de la semana (en español)
 
 Indicador de fin de semana
 
+
 📥 Método de carga
 
 Utiliza:
@@ -167,6 +180,7 @@ Conexión a PostgreSQL
 
 Método to_sql() con if_exists="append"
 
+
 ⭐ Modelo Dimensional
 
 El diseño implementado corresponde a un Modelo Estrella (Star Schema):
@@ -175,6 +189,7 @@ El diseño implementado corresponde a un Modelo Estrella (Star Schema):
                       |
                       |
 dim_fecha ---- fact_ventas_detalle ---- dim_producto
+
 🔁 SCD (Slowly Changing Dimension)
 
 Las dimensiones dim_cliente y dim_producto pueden implementar estrategia SCD Tipo 2 para mantener historial de cambios.
@@ -186,6 +201,7 @@ Preservar versiones históricas
 Consultar estado actual (es_actual = true)
 
 Analizar cambios en el tiempo
+
 
 ⚡ Optimización de Performance
 
@@ -201,6 +217,7 @@ Optimización en búsquedas por rango
 
 Soporte eficiente para consultas históricas SCD2
 
+
 ▶️ Orden de ejecución
 
 1️⃣ Ejecutar 01_create_dw_schema.sql
@@ -209,6 +226,7 @@ Soporte eficiente para consultas históricas SCD2
 4️⃣ Ejecutar script Python para poblar dim_fecha
 5️⃣ Cargar dimensiones desde staging
 6️⃣ Poblar tabla de hechos
+
 
 🎯 Objetivo de la capa DW
 
@@ -221,6 +239,7 @@ Permitir métricas confiables y consistentes
 Mantener historial de cambios (SCD Tipo 2)
 
 Aplicar buenas prácticas de modelado dimensional y optimización
+
 
 🧠 Arquitectura del Proyecto
 RAW      → Datos crudos
