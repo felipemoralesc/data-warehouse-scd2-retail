@@ -190,6 +190,7 @@ El diseño implementado corresponde a un Modelo Estrella (Star Schema):
                       |
 dim_fecha ---- fact_ventas_detalle ---- dim_producto
 
+
 🔁 SCD (Slowly Changing Dimension)
 
 Las dimensiones dim_cliente y dim_producto pueden implementar estrategia SCD Tipo 2 para mantener historial de cambios.
@@ -221,10 +222,15 @@ Soporte eficiente para consultas históricas SCD2
 ▶️ Orden de ejecución
 
 1️⃣ Ejecutar 01_create_dw_schema.sql
+
 2️⃣ Ejecutar 02_create_dw_tables.sql
+
 3️⃣ Ejecutar 03_create_dw_indexes.sql
+
 4️⃣ Ejecutar script Python para poblar dim_fecha
+
 5️⃣ Cargar dimensiones desde staging
+
 6️⃣ Poblar tabla de hechos
 
 
