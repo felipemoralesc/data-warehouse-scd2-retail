@@ -58,8 +58,7 @@ Características:
 ✔ Columnas estructuradas para análisis
 
 ✔ Separación clara respecto a la capa raw
-
-
+<br>
 **3️⃣ Carga desde RAW**
 * Archivo: 03_load_staging_tables.sql
 
