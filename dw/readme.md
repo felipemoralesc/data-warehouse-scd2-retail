@@ -179,6 +179,8 @@ Beneficios:
 
 ### ▶️ Orden de ejecución
 
+
+
 1️⃣ Ejecutar 01_create_dw_schema.sql
 
 2️⃣ Ejecutar 02_create_dw_tables.sql
@@ -190,6 +192,7 @@ Beneficios:
 5️⃣ Cargar dimensiones desde staging
 
 6️⃣ Poblar tabla de hechos
+
 
 
 ### 🎯 Objetivo de la capa DW
