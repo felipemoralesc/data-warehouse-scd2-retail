@@ -1,17 +1,14 @@
-STAGING LAYER — Transformación y Tipado de Datos
-🎯 Objetivo
+# STAGING LAYER — Transformación y Tipado de Datos
+### 🎯 Objetivo
 
 La capa staging actúa como zona intermedia entre la capa raw y el data warehouse.
 
 Su función principal es:
 
-Aplicar tipado fuerte
-
-Limpiar datos básicos
-
-Estandarizar formatos
-
-Preparar la información para el modelo dimensional
+* Aplicar tipado fuerte
+* Limpiar datos básicos
+* Estandarizar formatos
+* Preparar la información para el modelo dimensional
 
 Aquí comienzan las transformaciones estructurales, pero aún no se implementa lógica histórica ni modelo estrella.
 
