@@ -42,17 +42,12 @@ README.md
 * Archivo: 01_create_staging_schema.sql
 * Crea el schema staging dentro de la base de datos.
 
-2️⃣ Creación de Tablas
-
-Archivo: 02_create_staging_tables.sql
-
-Se crean las siguientes tablas:
-
-staging.clientes_clean
-
-staging.productos_clean
-
-staging.ventas_clean
+**2️⃣ Creación de Tablas**
+* Archivo: 02_create_staging_tables.sql
+* Se crean las siguientes tablas:
+* staging.clientes_clean
+* staging.productos_clean
+* staging.ventas_clean
 
 Características:
 
@@ -60,7 +55,7 @@ Características:
 ✔ Columnas estructuradas para análisis
 ✔ Separación clara respecto a la capa raw
 
-3️⃣ Carga desde RAW
+**3️⃣ Carga desde RAW**
 
 Archivo: 03_load_staging_tables.sql
 
@@ -84,6 +79,7 @@ SELECT
     cliente_id::INTEGER,
     ...
 FROM raw.ventas_csv;
+
 🔄 Transformaciones Aplicadas
 Tabla	Transformaciones
 clientes_clean	Tipado de ID y fecha, normalización de texto
