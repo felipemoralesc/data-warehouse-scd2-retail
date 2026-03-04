@@ -175,6 +175,8 @@ data-warehouse-scd2-retail/
 ### ⚙ Cómo Ejecutar el Proyecto
 
 **1️⃣ Clonar el repositorio**
+
+
 **2️⃣ Crear archivo .env en la raíz**
 ```text
 DB_HOST=localhost
