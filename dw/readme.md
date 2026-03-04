@@ -1,26 +1,22 @@
-🏛 Data Warehouse Layer (DW)
+# 🏛 Data Warehouse Layer (DW)
 
-📌 Descripción
+### 📌 Descripción
 
 La carpeta dw contiene la capa dimensional del proyecto data-warehouse-scd2-retail.
 
 Aquí se implementa el Modelo Estrella (Star Schema), el cual consolida los datos limpios provenientes de staging en estructuras optimizadas para análisis.
 
+
 Esta capa incluye:
+* Creación del schema dw
+* Creación de dimensiones
+* Creación de tabla de hechos
+* Cálculo automático de métricas
+* Generación y carga de la dimensión fecha
+* Optimización de performance mediante indexación estratégica
 
-Creación del schema dw
-
-Creación de dimensiones
-
-Creación de tabla de hechos
-
-Cálculo automático de métricas
-
-Generación y carga de la dimensión fecha
-
-Optimización de performance mediante indexación estratégica
-
-🗂 Estructura de la carpeta
+### 🗂 Estructura de la carpeta
+```text
 dw/
 │
 ├── sql/
@@ -32,31 +28,30 @@ dw/
 │   └── script_para_cargar_dim_fecha.py
 │
 └── README.md
-
-🗄 Carpeta /sql
+```
+### 🗄 Carpeta /sql
 
 Contiene los scripts DDL necesarios para crear y optimizar la estructura del Data Warehouse.
 
-1️⃣ 01_create_dw_schema.sql
+**1️⃣ 01_create_dw_schema.sql**
 
 Crea el schema del Data Warehouse:
-
+```text
 CREATE SCHEMA IF NOT EXISTS dw;
+```
 
-2️⃣ 02_create_dw_tables.sql
+**2️⃣ 02_create_dw_tables.sql**
 
 Incluye la creación de:
 
-📌 Dimensiones
+## 📌 Dimensiones
 
-dim_cliente
-
-dim_producto
-
-dim_fecha
+* dim_cliente
+* dim_producto
+* dim_fecha
 
 
-📌 Tabla de hechos
+### 📌 Tabla de hechos
 
 fact_ventas_detalle
 
