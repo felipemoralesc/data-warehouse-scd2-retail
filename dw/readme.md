@@ -205,5 +205,7 @@ Beneficios:
 
 ### 🧠 Arquitectura del Proyecto
 `RAW`      → `Datos crudos`
+
 `STAGING`  → `Limpieza y tipado`
+
 `DW`       → `Modelo dimensional analítico optimizado`
