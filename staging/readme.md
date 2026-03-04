@@ -53,7 +53,9 @@ README.md
 Características:
 
 ✔ Tipos de datos definidos correctamente (INTEGER, DATE, NUMERIC, BOOLEAN)
+
 ✔ Columnas estructuradas para análisis
+
 ✔ Separación clara respecto a la capa raw
 
 **3️⃣ Carga desde RAW**
