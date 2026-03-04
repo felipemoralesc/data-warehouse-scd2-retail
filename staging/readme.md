@@ -105,7 +105,11 @@ Eso pertenece a la capa dw.
 ### 🧠 Beneficios de esta capa
 
 ✔ Aísla datos sucios
+
 ✔ Reduce riesgo de errores en DW
+
 ✔ Permite auditoría y trazabilidad
+
 ✔ Mejora calidad de datos
+
 ✔ Facilita transformaciones posteriores
