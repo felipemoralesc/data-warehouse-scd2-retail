@@ -45,176 +45,139 @@ CREATE SCHEMA IF NOT EXISTS dw;
 Incluye la creación de:
 
 ## 📌 Dimensiones
-
 * dim_cliente
 * dim_producto
 * dim_fecha
 
 
 ### 📌 Tabla de hechos
-
-fact_ventas_detalle
+* fact_ventas_detalle
 
 La tabla de hechos implementa una columna calculada:
-
+```text
 total_venta NUMERIC(12,2)
 GENERATED ALWAYS AS ((cantidad::NUMERIC * precio_unitario)) STORED
+```
+
+### 🔎 Esto garantiza:
+* Integridad de datos
+* Eliminación de redundancia
+* Cálculo automático a nivel de base de datos
 
 
-🔎 Esto garantiza:
-
-Integridad de datos
-
-Eliminación de redundancia
-
-Cálculo automático a nivel de base de datos
-
-
-3️⃣ 03_create_dw_indexes.sql
+**3️⃣ 03_create_dw_indexes.sql**
 
 Define los índices estratégicos para optimizar el rendimiento del modelo dimensional.
 
 
-🎯 Objetivo de la indexación
+### 🎯 Objetivo de la indexación
 
 Mejorar el rendimiento en:
-
-Joins entre tabla de hechos y dimensiones
-
-Filtros analíticos por cliente, producto y fecha
-
-Consultas SCD Tipo 2 (registro actual e histórico)
-
-Consultas por rango de fechas
+* Joins entre tabla de hechos y dimensiones
+* Filtros analíticos por cliente, producto y fecha
+* Consultas SCD Tipo 2 (registro actual e histórico)
+* Consultas por rango de fechas
 
 
-📌 Índices en tabla de hechos
+### 📌 Índices en tabla de hechos
 
 Se crean índices sobre las claves foráneas:
-
-clave_cliente
-
-clave_producto
-
-clave_fecha
+* clave_cliente
+* clave_producto
+* clave_fecha
 
 Estos índices optimizan consultas como:
-
+```text
 SELECT *
 FROM dw.fact_ventas_detalle f
 JOIN dw.dim_cliente c 
   ON f.clave_cliente = c.clave_cliente;
-
-📌 Índices en dimensiones SCD Tipo 2
+```
+### 📌 Índices en dimensiones SCD Tipo 2
 
 Se implementan índices compuestos para optimizar:
-
-Búsqueda del registro actual
-
-Consultas históricas por vigencia
+* Búsqueda del registro actual
+* Consultas históricas por vigencia
 
 Ejemplo conceptual:
-
-(id_cliente_natural, es_actual)
-
-(id_producto_natural, es_actual)
+* (id_cliente_natural, es_actual)
+* (id_producto_natural, es_actual)
 
 Optimiza consultas del tipo:
-
+```text
 WHERE id_cliente_natural = 1001
 AND es_actual = true;
-
-📌 Índice en dimensión fecha
+```
+### 📌 Índice en dimensión fecha
 
 Se crea índice sobre:
-
-fecha
+* fecha
 
 Optimiza filtros por rango:
-
+```text
 WHERE fecha BETWEEN '2024-01-01' AND '2024-12-31';
-
-📅 Dimensión Fecha (dim_fecha)
+```
+### 📅 Dimensión Fecha (dim_fecha)
 
 La dimensión fecha se genera mediante un script en Python ubicado en:
 
-dw/script/script_para_cargar_dim_fecha.py
+**dw/script/script_para_cargar_dim_fecha.py**
 
-🔧 Características del script
-
-Genera fechas desde 2020-01-01 hasta 2030-12-31
-
-Crea clave surrogate en formato YYYYMMDD
+### 🔧 Características del script
+* Genera fechas desde 2020-01-01 hasta 2030-12-31
+* Crea clave surrogate en formato YYYYMMDD
 
 Incluye:
-
-Año
-
-Trimestre
-
-Mes
-
-Nombre del mes (en español)
-
-Día
-
-Nombre del día de la semana (en español)
-
-Indicador de fin de semana
+* Año
+* Trimestre
+* Mes
+* Nombre del mes (en español)
+* Día
+* Nombre del día de la semana (en español)
+* Indicador de fin de semana
 
 
-📥 Método de carga
+### 📥 Método de carga
 
 Utiliza:
-
-pandas
-
-SQLAlchemy
-
-Conexión a PostgreSQL
-
-Método to_sql() con if_exists="append"
+* pandas
+* SQLAlchemy
+* Conexión a PostgreSQL
+* Método to_sql() con if_exists="append"
 
 
-⭐ Modelo Dimensional
+### ⭐ Modelo Dimensional
 
 El diseño implementado corresponde a un Modelo Estrella (Star Schema):
-
+```text
                 dim_cliente
                       |
                       |
 dim_fecha ---- fact_ventas_detalle ---- dim_producto
+```
 
-
-🔁 SCD (Slowly Changing Dimension)
+### 🔁 SCD (Slowly Changing Dimension)
 
 Las dimensiones dim_cliente y dim_producto pueden implementar estrategia SCD Tipo 2 para mantener historial de cambios.
 
 Esto permite:
-
-Preservar versiones históricas
-
-Consultar estado actual (es_actual = true)
-
-Analizar cambios en el tiempo
+* Preservar versiones históricas
+* Consultar estado actual (es_actual = true)
+* Analizar cambios en el tiempo
 
 
-⚡ Optimización de Performance
+## ⚡ Optimización de Performance
 
 El modelo incorpora una capa de optimización física mediante indexación estratégica.
 
 Beneficios:
-
-Reducción en tiempos de ejecución de consultas analíticas
-
-Mejora en joins de alto volumen
-
-Optimización en búsquedas por rango
-
-Soporte eficiente para consultas históricas SCD2
+* Reducción en tiempos de ejecución de consultas analíticas
+* Mejora en joins de alto volumen
+* Optimización en búsquedas por rango
+* Soporte eficiente para consultas históricas SCD2
 
 
-▶️ Orden de ejecución
+### ▶️ Orden de ejecución
 
 1️⃣ Ejecutar 01_create_dw_schema.sql
 
@@ -229,20 +192,15 @@ Soporte eficiente para consultas históricas SCD2
 6️⃣ Poblar tabla de hechos
 
 
-🎯 Objetivo de la capa DW
-
-Optimizar consultas analíticas
-
-Separar procesamiento OLTP de análisis OLAP
-
-Permitir métricas confiables y consistentes
-
-Mantener historial de cambios (SCD Tipo 2)
-
-Aplicar buenas prácticas de modelado dimensional y optimización
+### 🎯 Objetivo de la capa DW
+* Optimizar consultas analíticas
+* Separar procesamiento OLTP de análisis OLAP
+* Permitir métricas confiables y consistentes
+* Mantener historial de cambios (SCD Tipo 2)
+* Aplicar buenas prácticas de modelado dimensional y optimización
 
 
-🧠 Arquitectura del Proyecto
-RAW      → Datos crudos
-STAGING  → Limpieza y tipado
-DW       → Modelo dimensional analítico optimizado
+### 🧠 Arquitectura del Proyecto
+`RAW`      → `Datos crudos`
+`STAGING`  → `Limpieza y tipado`
+`DW`       → `Modelo dimensional analítico optimizado`
