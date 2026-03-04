@@ -33,18 +33,14 @@ README.md
 
 ### 🗄 Base de Datos
 
-Motor: PostgreSQL
+* **Motor:** PostgreSQL
+* **Base:** ventas_dw
+* **Schema:** staging
 
-Base: ventas_dw
-
-Schema: staging
-
-📜 Scripts SQL
-1️⃣ Creación del Schema
-
-Archivo: 01_create_staging_schema.sql
-
-Crea el schema staging dentro de la base de datos.
+### 📜 Scripts SQL
+* **1️⃣ Creación del Schema**
+* Archivo: 01_create_staging_schema.sql
+* Crea el schema staging dentro de la base de datos.
 
 2️⃣ Creación de Tablas
 
