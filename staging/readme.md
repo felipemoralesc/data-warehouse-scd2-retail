@@ -39,6 +39,7 @@ README.md
 
 ### 📜 Scripts SQL
 
+
 **1️⃣ Creación del Schema**
 * Archivo: 01_create_staging_schema.sql
 * Crea el schema staging dentro de la base de datos.
@@ -57,6 +58,7 @@ Características:
 ✔ Columnas estructuradas para análisis
 
 ✔ Separación clara respecto a la capa raw
+
 
 **3️⃣ Carga desde RAW**
 
