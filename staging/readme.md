@@ -65,31 +65,28 @@ Características:
 
 Realiza:
 
-Inserción desde raw.*
-
-Conversión de tipos (CAST, ::)
-
-Limpieza básica (TRIM, LOWER, INITCAP)
-
-Conversión de fechas (TO_DATE)
-
-Cálculo de columna derivada (total en ventas)
+*Inserción desde raw.*
+* Conversión de tipos (CAST, ::)
+* Limpieza básica (TRIM, LOWER, INITCAP)
+* Conversión de fechas (TO_DATE)
+* Cálculo de columna derivada (total en ventas)
 
 Ejemplo conceptual:
-
+```text
 INSERT INTO staging.ventas_clean (...)
 SELECT
     fecha::DATE,
     cliente_id::INTEGER,
     ...
 FROM raw.ventas_csv;
-
+```
 🔄 Transformaciones Aplicadas
+<br>
 Tabla	Transformaciones
 clientes_clean	Tipado de ID y fecha, normalización de texto
 productos_clean	Conversión a boolean, tipado de precio
 ventas_clean	Tipado completo y cálculo de total
-🚫 Qué NO hace la capa STAGING
+### 🚫 Qué NO hace la capa STAGING
 
 No implementa SCD Tipo 2
 
