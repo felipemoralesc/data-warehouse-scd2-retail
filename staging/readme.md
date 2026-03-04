@@ -81,11 +81,15 @@ SELECT
 FROM raw.ventas_csv;
 ```
 🔄 Transformaciones Aplicadas
-<br>
+
 Tabla	Transformaciones
+
 clientes_clean	Tipado de ID y fecha, normalización de texto
+
 productos_clean	Conversión a boolean, tipado de precio
+
 ventas_clean	Tipado completo y cálculo de total
+
 ### 🚫 Qué NO hace la capa STAGING
 
 No implementa SCD Tipo 2
@@ -98,7 +102,7 @@ No contiene tablas de hechos
 
 Eso pertenece a la capa dw.
 
-🧠 Beneficios de esta capa
+### 🧠 Beneficios de esta capa
 
 ✔ Aísla datos sucios
 ✔ Reduce riesgo de errores en DW
