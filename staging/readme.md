@@ -29,10 +29,12 @@ DW → Modelo dimensional optimizado para análisis.
 
 📂 Estructura de la Carpeta
 /staging
+   /sql
    01_create_staging_schema.sql
    02_create_staging_tables.sql
    03_load_staging_tables.sql
-   README.md
+README.md
+
 🗄 Base de Datos
 
 Motor: PostgreSQL
