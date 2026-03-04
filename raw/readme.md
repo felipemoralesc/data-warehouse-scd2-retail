@@ -1,80 +1,81 @@
-# 📥 RAW LAYER — Ingestión de Datos Fuente
+# 📥 CAPA CRUDA — Ingestión de Datos Fuente
 
 ### 🎯 Objetivo
 
-La capa raw simula el sistema transaccional de una empresa retail y almacena los datos en su estado original dentro del schema raw en PostgreSQL.
+La capa raw simula el sistema transaccional de una empresa retail y almacena los datos en su estado original dentro del esquema raw en PostgreSQL.
 
 Esta capa:
-* Replica los archivos CSV fuente
-* No aplica transformaciones
-* No define llaves primarias ni foráneas
-* No realiza tipado estricto
+* Réplica de los archivos CSV fuente
+* Sin aplicación transformaciones
+* No se definen hojas primarias ni foráneas
+* No se realiza tipado estro
 * No contiene lógica de negocio
 * Es la representación más cercana al sistema origen.
 
-### 🏗 Estructura de la carpeta
-```text
-/raw
-   /data
-      clientes.csv
-      productos.csv
-      ventas_2024_01.csv
-   /sql
-      01_create_raw_schema.sql
-      02_create_raw_tables.sql
-   /scripts
-      load_one_file.py
-      load_multiple_files.py
-   README.md
+### 🏗 Estructura de la alfombra
+```texto
+/crudo
+ /datos
+ clientes.csv
+ productos.csv
+ ventas_2024_01.csv
+ /sql
+ 01_create_raw_schema.sql
+ 02_create_raw_tables.sql
+ /guiones
+ cargar_un_archivo.py
+ cargar_archivos_múltiples.py
+ README.md
 ```
 ### 🗄 Base de Datos
 
 * **Motor:** PostgreSQL
 * **Base de datos:** ventas_dw
-* **Schema:** raw
+* **Esquema:** crudo
 
 ### 📜 Scripts SQL
 
 
-**1️⃣ Creación del Schema**
+**1️⃣ Creación del esquema**
 * Archivo: 01_create_raw_schema.sql
 
-Crea el schema raw:
-```text
-CREATE SCHEMA IF NOT EXISTS "raw"
-AUTHORIZATION postgres;
+Crea el esquema crudo:
+```texto
+CREAR ESQUEMA SI NO EXISTE "crudo"
+AUTORIZACIÓN postgres;
 ```
 **2️⃣ Creación de Tablas**
 
 * Archivo: 02_create_raw_tables.sql
 
-Se crean las siguientes tablas:
+Se crea las señales tablas:
 * raw.clientes_csv
 * raw.productos_csv
 * raw.ventas_csv
 
-Todas las columnas están definidas como TEXT, ya que en la capa raw no se aplica tipado fuerte ni validaciones estructurales.
+Todas las columnas están definidas como TEXTO, ya que en la capa raw no se aplica tipado fuerte ni validaciones estructurales.
 
 Esto permite:
 
 * Mantener fidelidad al sistema fuente
 * Evitar errores de carga por formatos inconsistentes
-* Delegar limpieza y tipado a la capa staging
+* Delegar limpieza y tipado a la capa puta en escena
 
-### 🐍 Scripts de Ingestión en Python
+###🐍 Scripts de Ingestión en Python
 
-**1️⃣ load_one_file.py**
 
-Script inicial para probar la carga de un solo archivo usando:
+**1️⃣ cargar_un_archivo.py**
+
+Guía inicial para probar la carga de un solo archivo usando:
 
 * psycopg2
-* Método COPY
+* Método COPIA
 * Carga directa a raw.ventas_csv
-* Este script permitió validar conectividad y funcionamiento del proceso de carga.
+* Este script permite conectar y funcionamiento del proceso de carga.
 
-**2️⃣ load_multiple_files.py**
+**2️⃣ cargar_archivos_múltiples.py**
 
-Script mejorado para carga múltiple usando:
+Guía mejorado para carga múltiple usando:
 * pandas
 * SQLAlchemy
 * Función reutilizable cargar_csv_a_raw()
@@ -87,8 +88,8 @@ Características:
 * Validación de existencia de archivo
 * Conteo de registros
 * Manejo básico de errores
-* Carga mediante to_sql() con if_exists="append"
-* Este script representa una evolución hacia un proceso de ingestión más automatizado.
+* Carga mediante to_sql() con if_exists="agregar"
+* Esta guía representa una evolución hasta un proceso de ingesta más automatizado.
 
 **🔄 Flujo de Ejecución**
 * Ejecutar 01_create_raw_schema.sql
