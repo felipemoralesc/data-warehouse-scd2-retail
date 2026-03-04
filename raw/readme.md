@@ -1,4 +1,4 @@
-# 📥 CAPA CRUDA — Ingestión de Datos Fuente
+ 📥 CAPA CRUDA — Ingestión de Datos Fuente
 
 ### 🎯 Objetivo
 
@@ -55,13 +55,13 @@ Se crea las señales tablas:
 
 Todas las columnas están definidas como TEXTO, ya que en la capa raw no se aplica tipado fuerte ni validaciones estructurales.
 
-Esto permite:
+ No se realiza tipado estro
 
-* Mantener fidelidad al sistema fuente
+ 🎯 Objetivo###
 * Evitar errores de carga por formatos inconsistentes
 * Delegar limpieza y tipado a la capa puta en escena
 
-###🐍 Scripts de Ingestión en Python
+### 🐍 Scripts de Ingestión en Python
 
 
 **1️⃣ cargar_un_archivo.py**
