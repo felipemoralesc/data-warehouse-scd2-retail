@@ -29,7 +29,7 @@ Flujo general del proyecto:
    02_create_staging_tables.sql
    03_load_staging_tables.sql
 README.md
-```/text
+```
 
 ### 🗄 Base de Datos
 
