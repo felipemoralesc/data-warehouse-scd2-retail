@@ -57,7 +57,7 @@ Todas las columnas están definidas como TEXTO, ya que en la capa raw no se apli
 
  No se realiza tipado estro
 
- 🎯 Objetivo###
+### 🎯 Objetivo
 * Evitar errores de carga por formatos inconsistentes
 * Delegar limpieza y tipado a la capa puta en escena
 
