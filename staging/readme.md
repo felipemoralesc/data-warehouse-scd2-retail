@@ -61,8 +61,7 @@ Características:
 
 
 **3️⃣ Carga desde RAW**
-
-Archivo: 03_load_staging_tables.sql
+* Archivo: 03_load_staging_tables.sql
 
 Realiza:
 
