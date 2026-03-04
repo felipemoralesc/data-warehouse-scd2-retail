@@ -12,19 +12,17 @@ Su función principal es:
 
 Aquí comienzan las transformaciones estructurales, pero aún no se implementa lógica histórica ni modelo estrella.
 
-🏗 Rol dentro de la arquitectura
-
+### 🏗 Rol dentro de la arquitectura
 Flujo general del proyecto:
 
-CSV → RAW → STAGING → DATA WAREHOUSE
+`CSV` → `RAW` → `STAGING` → `DATA WAREHOUSE`
 
-RAW → Datos tal como llegan del sistema fuente (sin validación).
+* **RAW** → Datos tal como llegan del sistema fuente (sin validación).
+* **STAGING** → Datos tipados, limpios y estructurados.
+* **DW** → Modelo dimensional optimizado para análisis.
 
-STAGING → Datos tipados, limpios y estructurados.
-
-DW → Modelo dimensional optimizado para análisis.
-
-📂 Estructura de la Carpeta
+### 📂 Estructura de la Carpeta
+```text
 /staging
    /sql
    01_create_staging_schema.sql
@@ -32,7 +30,7 @@ DW → Modelo dimensional optimizado para análisis.
    03_load_staging_tables.sql
 README.md
 
-🗄 Base de Datos
+### 🗄 Base de Datos
 
 Motor: PostgreSQL
 
