@@ -38,6 +38,7 @@ README.md
 * **Schema:** staging
 
 ### 📜 Scripts SQL
+
 **1️⃣ Creación del Schema**
 * Archivo: 01_create_staging_schema.sql
 * Crea el schema staging dentro de la base de datos.
