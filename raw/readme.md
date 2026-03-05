@@ -1,37 +1,37 @@
-# 📥 CAPA CRUDA — Ingestión de Datos Fuente
+# 📥 CAPA RAW — Ingestión de data Fuente
 
 ### 🎯 Objetivo
 
-La capa raw simula el sistema transaccional de una empresa retail y almacena los datos en su estado original dentro del esquema raw en PostgreSQL.
+La capa raw simula el sistema transaccional de una empresa retail y almacena los data en su estado original dentro del esquema raw en PostgreSQL.
 
 Esta capa:
 * Réplica de los archivos CSV fuente
-* Sin aplicación transformaciones
+* Sin aplicar transformaciones
 * No se definen hojas primarias ni foráneas
-* No se realiza tipado estro
+* No se realiza tipado estricto
 * No contiene lógica de negocio
 * Es la representación más cercana al sistema origen.
 
 ### 🏗 Estructura de la alfombra
 ```texto
-/crudo
- /datos
+/raw
+ /data
  clientes.csv
  productos.csv
  ventas_2024_01.csv
  /sql
  01_create_raw_schema.sql
  02_create_raw_tables.sql
- /guiones
+ /scripts
  cargar_un_archivo.py
  cargar_archivos_múltiples.py
  README.md
 ```
-### 🗄 Base de Datos
+### 🗄 Base de data
 
 * **Motor:** PostgreSQL
-* **Base de datos:** ventas_dw
-* **Esquema:** crudo
+* **Base de data:** ventas_dw
+* **Esquema:** raw
 
 ### 📜 Scripts SQL
 
@@ -39,9 +39,9 @@ Esta capa:
 **1️⃣ Creación del esquema**
 * Archivo: 01_create_raw_schema.sql
 
-Crea el esquema crudo:
+Crea el esquema raw:
 ```texto
-CREAR ESQUEMA SI NO EXISTE "crudo"
+CREAR ESQUEMA SI NO EXISTE "raw"
 AUTORIZACIÓN postgres;
 ```
 **2️⃣ Creación de Tablas**
@@ -55,11 +55,11 @@ Se crea las señales tablas:
 
 Todas las columnas están definidas como TEXTO, ya que en la capa raw no se aplica tipado fuerte ni validaciones estructurales.
 
- No se realiza tipado estro
+ No se realiza tipado estricto
 
 ### 🎯 Objetivo
 * Evitar errores de carga por formatos inconsistentes
-* Delegar limpieza y tipado a la capa puta en escena
+* Delegar limpieza y tipado a la capa staging
 
 ### 🐍 Scripts de Ingestión en Python
 
@@ -109,15 +109,15 @@ Flujo general del proyecto:
 
 La capa raw:
 * Actúa como zona de aterrizaje
-* Preserva datos originales
+* Preserva data originales
 * Separa ingestión de transformación
 * Permite trazabilidad completa del pipeline
 
 
-### Generación de Datos de Prueba
+### Generación de data de Prueba
 
-Para simular un entorno con mayor volumen de información se generaron datos de prueba directamente en PostgreSQL.
-Los datos sintéticos se generan mediante scripts SQL versionados dentro de la carpeta `raw/sql`, los cuales insertan registros
+Para simular un entorno con mayor volumen de información se generaron data de prueba directamente en PostgreSQL.
+Los data sintéticos se generan mediante scripts SQL versionados dentro de la carpeta `raw/sql`, los cuales insertan registros
 aleatorios directamente en las tablas RAW utilizando funciones de PostgreSQL como `generate_series()` y `random()`.
 
 Volumen actual utilizado en el proyecto:
@@ -133,7 +133,7 @@ El objetivo de este volumen es:
 - probar comportamiento del SCD Tipo 2
 - analizar uso de índices con `EXPLAIN ANALYZE`
 
-Los datos generados se cargan inicialmente en las tablas RAW antes de aplicar transformaciones hacia STAGING.
+Los data generados se cargan inicialmente en las tablas RAW antes de aplicar transformaciones hacia STAGING.
 
 ### ⚙ Tecnologías Utilizadas
 * PostgreSQL
