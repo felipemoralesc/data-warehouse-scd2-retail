@@ -176,6 +176,7 @@ Beneficios:
 
 
 Soporte eficiente para consultas históricas SCD2
+
 **▶️ Orden de ejecución**
 
 **1️⃣ Ejecutar 01_create_dw_schema.sql**
