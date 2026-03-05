@@ -1,3 +1,8 @@
+/* =========================================================
+   FASE 1 — Carga inicial desde CSV (dataset pequeño)
+   Objetivo: probar el pipeline RAW → STAGING
+========================================================= */
+-- ventas_clean
 INSERT INTO staging.ventas_clean (
     fecha,
     cliente_id,
@@ -15,6 +20,7 @@ SELECT
     (cantidad::NUMERIC * precio_unitario::NUMERIC) AS total
 FROM raw.ventas_csv;
 -----------------------------------------------------------------------
+-- Productos_clean
 INSERT INTO staging.productos_clean (
     producto_id,
     nombre_producto,
@@ -33,6 +39,7 @@ SELECT
     END
 FROM raw.productos_csv;
 -----------------------------------------------------------------------------
+-- clientes_clean
 INSERT INTO staging.clientes_clean (
     cliente_id,
     email,
@@ -49,3 +56,23 @@ SELECT
     INITCAP(TRIM(ciudad)),
     TO_DATE(fecha_registro, 'YYYY-MM-DD')
 FROM raw.clientes_csv;
+------------------------------------------------------------------------------------
+/* =========================================================
+   FASE 2 — Carga con dataset ampliado (datos sintéticos)
+   Objetivo: simular volumen real para pruebas de DW
+========================================================= */
+-- clientes (5.000 registros generados en RAW)
+INSERT INTO staging.clientes_clean (
+    cliente_id,
+    nombre_cliente,
+    ciudad,
+    fecha_registro
+)
+SELECT
+    cliente_id::INTEGER,
+    INITCAP(TRIM(nombre_cliente)),
+    INITCAP(TRIM(ciudad)),
+    TO_DATE(fecha_registro, 'YYYY-MM-DD')
+FROM raw.clientes_csv;
+------------------------------------------------------------
+
