@@ -113,6 +113,26 @@ La capa raw:
 * Separa ingestión de transformación
 * Permite trazabilidad completa del pipeline
 
+
+### Generación de Datos de Prueba
+
+Para simular un entorno con mayor volumen de información se generaron datos de prueba directamente en PostgreSQL.
+
+Volumen actual utilizado en el proyecto:
+
+- 5.000 clientes
+- 1.000 productos (pendiente)
+- 100.000 ventas (pendiente)
+
+El objetivo de este volumen es:
+
+- simular cargas realistas
+- validar joins en el Data Warehouse
+- probar comportamiento del SCD Tipo 2
+- analizar uso de índices con `EXPLAIN ANALYZE`
+
+Los datos generados se cargan inicialmente en las tablas RAW antes de aplicar transformaciones hacia STAGING.
+
 ### ⚙ Tecnologías Utilizadas
 * PostgreSQL
 * Python
