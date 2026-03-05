@@ -61,6 +61,13 @@ FROM raw.clientes_csv;
    FASE 2 — Carga con dataset ampliado (datos sintéticos)
    Objetivo: simular volumen real para pruebas de DW
 ========================================================= */
+
+/* =====================================================
+   RAW → STAGING
+   Transformación de clientes
+   Conversión de tipos y limpieza básica
+===================================================== */
+
 -- clientes (5.000 registros generados en RAW)
 INSERT INTO staging.clientes_clean (
     cliente_id,
