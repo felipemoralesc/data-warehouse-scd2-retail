@@ -16,15 +16,16 @@ Esta capa:
 ```texto
 /raw
  /data
- clientes.csv
- productos.csv
- ventas_2024_01.csv
+  clientes.csv
+  productos.csv
+  ventas_2024_01.csv
  /sql
- 01_create_raw_schema.sql
- 02_create_raw_tables.sql
+  01_create_raw_schema.sql
+  02_create_raw_tables.sql
+  03_generate_clientes_sinteticos.sql
  /scripts
- cargar_un_archivo.py
- cargar_archivos_múltiples.py
+  cargar_un_archivo.py
+  cargar_archivos_multiples.py
  README.md
 ```
 ### 🗄 Base de data
@@ -41,8 +42,8 @@ Esta capa:
 
 Crea el esquema raw:
 ```texto
-CREAR ESQUEMA SI NO EXISTE "raw"
-AUTORIZACIÓN postgres;
+CREATE SCHEMA IF NOT EXISTS raw
+AUTHORIZATION postgres;
 ```
 **2️⃣ Creación de Tablas**
 
@@ -73,7 +74,7 @@ Guía inicial para probar la carga de un solo archivo usando:
 * Carga directa a raw.ventas_csv
 * Este script permite conectar y funcionamiento del proceso de carga.
 
-**2️⃣ cargar_archivos_múltiples.py**
+**2️⃣ load_multiple_files.py**
 
 Guía mejorado para carga múltiple usando:
 * pandas
@@ -109,7 +110,7 @@ Flujo general del proyecto:
 
 La capa raw:
 * Actúa como zona de aterrizaje
-* Preserva data originales
+* Preserva los datos originales
 * Separa ingestión de transformación
 * Permite trazabilidad completa del pipeline
 
@@ -134,10 +135,3 @@ El objetivo de este volumen es:
 - analizar uso de índices con `EXPLAIN ANALYZE`
 
 Los data generados se cargan inicialmente en las tablas RAW antes de aplicar transformaciones hacia STAGING.
-
-### ⚙ Tecnologías Utilizadas
-* PostgreSQL
-* Python
-* psycopg2
-* pandas
-* SQLAlchemy
