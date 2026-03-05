@@ -117,6 +117,8 @@ La capa raw:
 ### Generación de Datos de Prueba
 
 Para simular un entorno con mayor volumen de información se generaron datos de prueba directamente en PostgreSQL.
+Los datos sintéticos se generan mediante scripts SQL versionados dentro de la carpeta `raw/sql`, los cuales insertan registros
+aleatorios directamente en las tablas RAW utilizando funciones de PostgreSQL como `generate_series()` y `random()`.
 
 Volumen actual utilizado en el proyecto:
 
