@@ -29,7 +29,9 @@ dw/
 ```
 
 **🗄 Carpeta /sql**
+
 Contiene los scripts DDL necesarios para crear y optimizar la estructura del Data Warehouse.
+
 
 **1️⃣ 01_create_dw_schema.sql**
 
