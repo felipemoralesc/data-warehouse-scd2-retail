@@ -19,14 +19,41 @@ Aplicando:
 
 ### 🏗 Arquitectura
 ```text
-Fuentes CSV
-      ↓
-Raw Layer
-      ↓
-Staging Layer
-      ↓
-Data Warehouse (Modelo Estrella optimizado)
+Fuentes CSV / Datos Sintéticos
+            ↓
+        Raw Layer
+            ↓
+      Staging Layer
+            ↓
+  Data Warehouse (Star Schema)
+            ↓
+  Consultas Analíticas / BI
 ```
+
+### 📊 Generación de Datos Sintéticos
+
+Además del dataset inicial cargado desde archivos CSV, el proyecto incorpora
+generación de datos sintéticos directamente en PostgreSQL para simular un
+escenario de mayor volumen de información.
+
+Esto permite validar el comportamiento del modelo dimensional bajo cargas
+más realistas y analizar el rendimiento de consultas analíticas.
+
+La generación de datos se implementa mediante scripts SQL versionados en la
+capa RAW utilizando funciones nativas de PostgreSQL como:
+
+- generate_series()
+- random()
+
+Volumen de datos utilizado:
+
+- 5.000 clientes
+- 1.000 productos
+- 100.000 ventas
+
+Estos datos se cargan inicialmente en las tablas RAW y posteriormente pasan
+por las transformaciones hacia STAGING y el modelo dimensional en DW.
+
 **🔹 Raw Layer**
 
 * Almacena datos fuente sin transformación.
@@ -139,14 +166,21 @@ Permite:
 * Consultar estado histórico por fecha
 
 ### 🛠 Stack Tecnológico
+
+**Tecnologías**
+
 * PostgreSQL
-* SQL
 * Python
 * pandas
 * SQLAlchemy
 * psycopg2
 * python-dotenv
+
+**Conceptos de Ingeniería de Datos**
+
 * Modelado Dimensional
+* Slowly Changing Dimensions (SCD Tipo 2)
+* Arquitectura por capas (Raw → Staging → DW)
 * Optimización con índices compuestos
 
 ### 📂 Estructura del Repositorio
@@ -189,15 +223,16 @@ DB_PORT=5432
 * pip install -r requirements.txt
   
 **4️⃣ Ejecutar en orden**
-* Crear base de datos
-* Ejecutar SQL de Raw
-* Ejecutar scripts de carga Raw
-* Ejecutar SQL de Staging
-* Ejecutar SQL de DW
-* Ejecutar script de dim_fecha
-* Poblar dimensiones
-* Poblar tabla de hechos
-* Validar con EXPLAIN ANALYZE
+
+1. Crear base de datos
+2. Ejecutar scripts SQL de creación de tablas en RAW
+3. Ejecutar scripts Python de carga de datos en RAW
+4. Ejecutar transformaciones en STAGING
+5. Crear estructuras del Data Warehouse
+6. Generar dim_fecha
+7. Poblar dimensiones
+8. Poblar tabla de hechos
+9. Validar performance con EXPLAIN ANALYZE
 
 ### 🔐 Seguridad
 
