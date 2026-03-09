@@ -42,36 +42,29 @@ LEFT JOIN dw.dim_producto d
 WHERE d.producto_id IS NULL;
 
 /* ==============================================================
-   FASE 3 - Insertar nuevas versiones de clientes modificados
+   FASE 3 - Insertar nuevas versiones de productos modificados
 ============================================================== */
 
-INSERT INTO dw.dim_cliente (
-    cliente_id,
-    email_cliente,
-    nombre,
-    apellido,
-    ciudad,
+INSERT INTO dw.dim_producto (
+    producto_id,
+    nombre_producto,
+    categoria,
+    precio,
     fecha_inicio_vigencia,
     fecha_fin_vigencia,
     es_actual
 )
+
 SELECT
-    s.cliente_id,
-    s.email,
-    s.nombre,
-    s.apellido,
-    s.ciudad,
+    s.producto_id,
+    s.nombre_producto,
+    s.categoria,
+    s.precio_lista,
     CURRENT_DATE,
     NULL,
     TRUE
-FROM staging.clientes_clean s
-LEFT JOIN dw.dim_cliente d
-    ON s.cliente_id = d.cliente_id
-    AND d.es_actual = TRUE
-WHERE d.cliente_id IS NULL
-OR (
-       d.email_cliente IS DISTINCT FROM s.email
-    OR d.nombre IS DISTINCT FROM s.nombre
-    OR d.apellido IS DISTINCT FROM s.apellido
-    OR d.ciudad IS DISTINCT FROM s.ciudad
-);
+FROM staging.productos_clean s
+JOIN dw.dim_producto d
+    ON s.producto_id = d.producto_id
+WHERE d.es_actual = FALSE
+AND d.fecha_fin_vigencia = CURRENT_DATE;
