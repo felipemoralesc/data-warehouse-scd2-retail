@@ -9,10 +9,10 @@ FROM staging.clientes_clean s
 WHERE d.cliente_id = s.cliente_id
 AND d.es_actual = TRUE
 AND (
-        d.email_cliente <> s.email_cliente
-     OR d.nombre <> s.nombre
-     OR d.apellido <> s.apellido
-     OR d.ciudad <> s.ciudad
+        d.email_cliente IS DISTINCT FROM s.email
+     OR d.nombre IS DISTINCT FROM s.nombre
+     OR d.apellido IS DISTINCT FROM s.apellido
+     OR d.ciudad IS DISTINCT FROM s.ciudad
 );
 
 
@@ -42,9 +42,6 @@ SELECT
     TRUE
 FROM staging.clientes_clean s
 LEFT JOIN dw.dim_cliente d
-
-
-Insertar nuevas versiones de clientes modificados
     ON s.cliente_id = d.cliente_id
 WHERE d.cliente_id IS NULL;
 
