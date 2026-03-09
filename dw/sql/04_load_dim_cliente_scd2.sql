@@ -1,1 +1,49 @@
-Cerrar vigencia de registros que cambiaron
+/* =========================================================
+   FASE 1 — Cerrar vigencia de registros que cambiaron
+========================================================= */
+UPDATE dw.dim_cliente d
+SET
+    fecha_fin_vigencia = CURRENT_DATE - INTERVAL '1 day',
+    es_actual = FALSE
+FROM staging.clientes_clean s
+WHERE d.cliente_id = s.cliente_id
+AND d.es_actual = TRUE
+AND (
+        d.email_cliente <> s.email_cliente
+     OR d.nombre <> s.nombre
+     OR d.apellido <> s.apellido
+     OR d.ciudad <> s.ciudad
+);
+
+
+/* =========================================================
+   FASE 2 - Insertar nuevos clientes
+========================================================= */
+
+INSERT INTO dw.dim_cliente (
+    cliente_id,
+    email_cliente,
+    nombre,
+    apellido,
+    ciudad,
+    fecha_inicio_vigencia,
+    fecha_fin_vigencia,
+    es_actual
+)
+
+SELECT
+    s.cliente_id,
+    s.email,
+    s.nombre,
+    s.apellido,
+    s.ciudad,
+    CURRENT_DATE,
+    NULL,
+    TRUE
+FROM staging.clientes_clean s
+LEFT JOIN dw.dim_cliente d
+    ON s.cliente_id = d.cliente_id
+WHERE d.cliente_id IS NULL;
+
+
+
