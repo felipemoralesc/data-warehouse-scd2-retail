@@ -1,20 +1,18 @@
 /* =========================================================
-   FASE 1 — Cerrar vigencia de registros que cambiaron
+   FASE 1 — Cerrar vigencia de productos que cambiaron
 ========================================================= */
-UPDATE dw.dim_cliente d
-SET
+UPDATE dw.dim_producto d
+SET 
     fecha_fin_vigencia = CURRENT_DATE,
     es_actual = FALSE
-FROM staging.clientes_clean s
-WHERE d.cliente_id = s.cliente_id
+FROM staging.productos_clean s
+WHERE d.producto_id = s.producto_id
 AND d.es_actual = TRUE
 AND (
-       LOWER(TRIM(d.email_cliente)) IS DISTINCT FROM LOWER(TRIM(s.email))
-OR LOWER(TRIM(d.nombre)) IS DISTINCT FROM LOWER(TRIM(s.nombre))
-OR LOWER(TRIM(d.apellido)) IS DISTINCT FROM LOWER(TRIM(s.apellido))
-OR LOWER(TRIM(d.ciudad)) IS DISTINCT FROM LOWER(TRIM(s.ciudad))
+       d.nombre_producto IS DISTINCT FROM s.nombre_producto
+    OR d.categoria IS DISTINCT FROM s.categoria
+    OR d.precio IS DISTINCT FROM s.precio_lista
 );
-
 
 /* =========================================================
    FASE 2 - Insertar nuevos clientes
