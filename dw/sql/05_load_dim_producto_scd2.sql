@@ -15,33 +15,31 @@ AND (
 );
 
 /* =========================================================
-   FASE 2 - Insertar nuevos clientes
+   FASE 2 - Insertar nuevos productos
 ========================================================= */
 
-INSERT INTO dw.dim_cliente (
-    cliente_id,
-    email_cliente,
-    nombre,
-    apellido,
-    ciudad,
+INSERT INTO dw.dim_producto (
+    producto_id,
+    nombre_producto,
+    categoria,
+    precio,
     fecha_inicio_vigencia,
     fecha_fin_vigencia,
     es_actual
 )
 
 SELECT
-    s.cliente_id,
-    s.email,
-    s.nombre,
-    s.apellido,
-    s.ciudad,
+    s.producto_id,
+    s.nombre_producto,
+    s.categoria,
+    s.precio_lista,
     CURRENT_DATE,
     NULL,
     TRUE
-FROM staging.clientes_clean s
-LEFT JOIN dw.dim_cliente d
-    ON s.cliente_id = d.cliente_id
-WHERE d.cliente_id IS NULL;
+FROM staging.productos_clean s
+LEFT JOIN dw.dim_producto d
+    ON s.producto_id = d.producto_id
+WHERE d.producto_id IS NULL;
 
 /* ==============================================================
    FASE 3 - Insertar nuevas versiones de clientes modificados
