@@ -102,6 +102,23 @@ SELECT
 	activo::BOOLEAN
 FROM raw.productos_csv;
 ----------------------------------------------------------------
+-- ventas (100.000 ventas generadas en raw)
+INSERT INTO staging.ventas_clean (
+    fecha,
+    cliente_id,
+    producto_id,
+    cantidad,
+    precio_unitario,
+    total
+)
 
+SELECT
+    fecha::DATE,
+    cliente_id::INTEGER,
+    producto_id::INTEGER,
+    cantidad::INTEGER,
+    precio_unitario::NUMERIC(10,2),
+    (cantidad::INTEGER * precio_unitario::NUMERIC(10,2)) AS total
+FROM raw.ventas_csv;
 
 
