@@ -139,4 +139,8 @@ El objetivo de este volumen es:
 - probar comportamiento del SCD Tipo 2
 - analizar uso de índices con `EXPLAIN ANALYZE`
 
-Los data generados se cargan inicialmente en las tablas RAW antes de aplicar transformaciones hacia STAGING.
+### Flujo de generación de datos sintéticos:
+
+1. 03_generate_clientes_sinteticos.sql
+2. 04_generate_productos_sinteticos.sql
+3. 05_generate_ventas_sinteticos.sql
