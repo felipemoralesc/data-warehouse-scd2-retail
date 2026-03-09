@@ -128,9 +128,10 @@ aleatorios directamente en las tablas RAW utilizando funciones de PostgreSQL com
 Volumen actual utilizado en el proyecto:
 
 - 5.000 clientes
-- 1.000 productos (pendiente)
-- 100.000 ventas (pendiente)
+- 1.000 productos
+- 100.000 ventas
 
+  
 El objetivo de este volumen es:
 
 - simular cargas realistas
