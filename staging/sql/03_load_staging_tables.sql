@@ -86,4 +86,22 @@ SELECT
     TO_DATE(fecha_registro, 'YYYY-MM-DD')
 FROM raw.clientes_csv;
 ------------------------------------------------------------
+-- productos (1.000 productos generados en RAW)
+INSERT INTO staging.productos_clean (
+    producto_id,
+    nombre_producto,
+	categoria,
+    precio_lista,
+    activo
+)
+SELECT
+    producto_id::INTEGER,
+    INITCAP(TRIM(nombre_producto)),
+	INITCAP(TRIM(categoria)),
+    precio_lista::NUMERIC(10,2),
+	activo::BOOLEAN
+FROM raw.productos_csv;
+----------------------------------------------------------------
+
+
 
