@@ -15,6 +15,3 @@ SELECT
     (CURRENT_DATE - (random()*3650)::int)::text AS fecha_registro
 FROM generate_series(1,5000) AS gs;
 
-
-select count(*)
-from raw.clientes_csv
