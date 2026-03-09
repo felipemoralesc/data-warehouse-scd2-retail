@@ -71,13 +71,17 @@ FROM raw.clientes_csv;
 -- clientes (5.000 registros generados en RAW)
 INSERT INTO staging.clientes_clean (
     cliente_id,
-    nombre_cliente,
+	email,
+    nombre,
+	apellido,
     ciudad,
     fecha_registro
 )
 SELECT
     cliente_id::INTEGER,
-    INITCAP(TRIM(nombre_cliente)),
+	email::character varying(150),
+    INITCAP(TRIM(nombre)),
+	INITCAP(TRIM(apellido)),
     INITCAP(TRIM(ciudad)),
     TO_DATE(fecha_registro, 'YYYY-MM-DD')
 FROM raw.clientes_csv;
