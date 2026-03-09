@@ -9,10 +9,10 @@ FROM staging.clientes_clean s
 WHERE d.cliente_id = s.cliente_id
 AND d.es_actual = TRUE
 AND (
-        d.email_cliente IS DISTINCT FROM s.email
-     OR d.nombre IS DISTINCT FROM s.nombre
-     OR d.apellido IS DISTINCT FROM s.apellido
-     OR d.ciudad IS DISTINCT FROM s.ciudad
+       LOWER(TRIM(d.email_cliente)) IS DISTINCT FROM LOWER(TRIM(s.email))
+OR LOWER(TRIM(d.nombre)) IS DISTINCT FROM LOWER(TRIM(s.nombre))
+OR LOWER(TRIM(d.apellido)) IS DISTINCT FROM LOWER(TRIM(s.apellido))
+OR LOWER(TRIM(d.ciudad)) IS DISTINCT FROM LOWER(TRIM(s.ciudad))
 );
 
 
