@@ -13,19 +13,23 @@ Esta capa:
 * Es la representación más cercana al sistema origen.
 
 ### 🏗 Estructura de la alfombra
-```texto
-/raw
+```texto/raw
  /data
   clientes.csv
   productos.csv
   ventas_2024_01.csv
+
  /sql
   01_create_raw_schema.sql
   02_create_raw_tables.sql
   03_generate_clientes_sinteticos.sql
+  04_generate_productos_sinteticos.sql
+  05_generate_ventas_sinteticos.sql
+
  /scripts
-  cargar_un_archivo.py
-  cargar_archivos_multiples.py
+  load_one_file.py
+  load_multiple_files.py
+
  README.md
 ```
 ### 🗄 Base de data
