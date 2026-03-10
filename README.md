@@ -251,13 +251,13 @@ Se gestionan mediante variables de entorno y archivo .env.
 
 ### 🎯 Objetivo Profesional
 
-Este proyecto demuestra:
+Este proyecto demuestra habilidades en:
 
-* Diseño de arquitectura de datos
-* Implementación SCD Tipo 2
-* Modelado estrella
-* Separación por capas
-* Optimización física con índices
-* Validación de performance con EXPLAIN
-* Buenas prácticas de ingeniería de datos
-* Gestión segura de credenciales
+* Diseño de arquitectura de datos por capas
+* Implementación de Slowly Changing Dimensions (SCD Tipo 2)
+* Modelado dimensional (Star Schema)
+* Construcción de pipelines SQL para transformación de datos
+* Optimización de consultas analíticas mediante indexación
+* Validación de rendimiento utilizando `EXPLAIN ANALYZE`
+* Buenas prácticas de organización de repositorios de datos
+* Gestión segura de credenciales mediante variables de entorno
