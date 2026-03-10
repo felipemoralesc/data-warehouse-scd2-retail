@@ -44,6 +44,8 @@ GROUP BY
     df.anio,
     df.mes;
 
+---
+
 ## 3. Consideraciones de Indexación
 
 El modelo del Data Warehouse ya incorpora indexación estratégica
