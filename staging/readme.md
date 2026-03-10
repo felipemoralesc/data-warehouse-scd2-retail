@@ -10,12 +10,12 @@ Su función principal es:
 * Estandarizar formatos
 * Preparar la información para el modelo dimensional
 
-Aquí comienzan las transformaciones estructurales, pero aún no se implementa lógica histórica ni modelo estrella.
+Aquí comienzan las transformaciones estructurales, pero aún no se implementa lógica histórica (SCD) ni el modelo dimensional.
 
 ### 🏗 Rol dentro de la arquitectura
 Flujo general del proyecto:
 
-`CSV` → `RAW` → `STAGING` → `DATA WAREHOUSE`
+`CSV` → `RAW` → `STAGING` → `DATA WAREHOUSE (Star Schema)`
 
 * **RAW** → Datos tal como llegan del sistema fuente (sin validación).
 * **STAGING** → Datos tipados, limpios y estructurados.
@@ -80,15 +80,13 @@ SELECT
     ...
 FROM raw.ventas_csv;
 ```
-🔄 Transformaciones Aplicadas
+### 🔄 Transformaciones Aplicadas
 
-Tabla	Transformaciones
-
-clientes_clean	Tipado de ID y fecha, normalización de texto
-
-productos_clean	Conversión a boolean, tipado de precio
-
-ventas_clean	Tipado completo y cálculo de total
+| Tabla | Transformaciones |
+|------|------|
+| clientes_clean | Tipado de ID, limpieza de texto y normalización |
+| productos_clean | Conversión de precio a NUMERIC y activo a BOOLEAN |
+| ventas_clean | Tipado completo y cálculo de columna `total` |
 
 ### 🚫 Qué NO hace la capa STAGING
 
