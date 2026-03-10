@@ -84,11 +84,7 @@ En consultas que procesan grandes porciones de la tabla, PostgreSQL prefiere Seq
 
 Las pruebas realizadas permitieron validar que:
 
-El modelo estrella soporta correctamente consultas analíticas.
-
-Los joins entre tabla de hechos y dimensiones funcionan de forma eficiente.
-
-Los índices están correctamente implementados.
-
-
-El Data Warehouse responde adecuadamente a consultas analíticas típicas.
+- El modelo estrella soporta correctamente consultas analíticas.
+- Los joins entre tabla de hechos y dimensiones funcionan de forma eficiente.
+- Los índices están correctamente implementados.
+- El Data Warehouse responde adecuadamente a consultas analíticas típicas.
