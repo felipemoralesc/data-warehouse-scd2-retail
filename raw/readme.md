@@ -81,7 +81,7 @@ Guía inicial para probar la carga de un solo archivo usando:
 
 **2️⃣ load_multiple_files.py**
 
-Guía mejorado para carga múltiple usando:
+Script mejorado para carga múltiple usando:
 * pandas
 * SQLAlchemy
 * Función reutilizable cargar_csv_a_raw()
@@ -140,7 +140,7 @@ El objetivo de este volumen es:
 - probar comportamiento del SCD Tipo 2
 - analizar uso de índices con `EXPLAIN ANALYZE`
 
-### Flujo de generación de datos sintéticos:
+### 🔄 Flujo de generación de datos sintéticos
 
 1. 03_generate_clientes_sinteticos.sql
 2. 04_generate_productos_sinteticos.sql
