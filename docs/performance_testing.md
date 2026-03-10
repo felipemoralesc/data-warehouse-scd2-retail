@@ -66,7 +66,7 @@ plan de ejecución y el uso de estos índices.
 
 Los planes de ejecución fueron analizados utilizando:
 
-EXPLAIN ANALYZE
+`EXPLAIN ANALYZE`
 
 Se observaron principalmente los siguientes componentes:
 
