@@ -261,3 +261,33 @@ Este proyecto demuestra habilidades en:
 * Validación de rendimiento utilizando `EXPLAIN ANALYZE`
 * Buenas prácticas de organización de repositorios de datos
 * Gestión segura de credenciales mediante variables de entorno
+
+## 🧠 Habilidades Demostradas
+
+Este proyecto evidencia experiencia práctica en:
+
+**Data Engineering**
+
+- Diseño de pipelines de datos por capas
+- Modelado dimensional (Star Schema)
+- Implementación de Slowly Changing Dimensions (SCD Tipo 2)
+- Transformaciones SQL para ETL
+
+**Data Warehousing**
+
+- Diseño de tablas de hechos y dimensiones
+- Uso de claves sustitutas (Surrogate Keys)
+- Gestión de historial en dimensiones
+
+**Optimización de consultas**
+
+- Indexación estratégica
+- Análisis de ejecución con EXPLAIN ANALYZE
+
+**Herramientas**
+
+- PostgreSQL
+- Python
+- pandas
+- SQLAlchemy
+- psycopg2
