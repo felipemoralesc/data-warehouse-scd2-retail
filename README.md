@@ -8,7 +8,7 @@ Este proyecto implementa un Data Warehouse simulando un entorno de ventas retail
 
 Se construye un pipeline estructurado por capas:
 
-`Raw` → `Staging` → `Data Warehouse`
+`RAW` → `STAGING` → `DATA WAREHOUSE`
 
 Aplicando:
 * Modelado dimensional
@@ -88,9 +88,10 @@ staging/
 
 ### 📌 Dimensiones
 
-* dim_cliente (SCD Tipo 2)
-* dim_producto (SCD Tipo 2)
-* dim_fecha (generada automáticamente)
+* **dim_cliente** — Implementa Slowly Changing Dimension Tipo 2
+* **dim_producto** — Implementa Slowly Changing Dimension Tipo 2
+* **dim_fecha** — Dimensión calendario generada automáticamente mediante script Python
+
 
 ### 📌 Tabla de Hechos
 
@@ -99,11 +100,10 @@ staging/
 Incluye:
 
 * Claves sustitutas (Surrogate Keys)
-* Claves naturales
-* Columna generada total_venta
-* Control de vigencia histórica
-* Indicador es_actual
+* Claves foráneas hacia dimensiones
+* Columna generada `total_venta`
 
+  
 ### ⚡ Optimización de Performance
 
 El modelo incorpora una capa de optimización física mediante indexación estratégica.
@@ -146,12 +146,13 @@ La correcta utilización de los índices fue validada mediante:
 * EXPLAIN ANALYZE
 
 Se verificó:
-* Uso de Index Scan
-* Uso de índices compuestos en consultas SCD2
-* Eliminación de Seq Scan innecesarios
-* Mejora en costos estimados y tiempos de ejecución
-* Esto confirma que el modelo está optimizado para cargas analíticas.
 
+* Uso de `Index Scan` en consultas analíticas
+* Uso de índices compuestos en búsquedas SCD Tipo 2
+* Reducción de `Seq Scan` en joins de alto volumen
+* Mejora en costos estimados y tiempos de ejecución
+
+  
 **🔁 Implementación SCD Tipo 2**
 
 Cada cambio relevante en dimensiones genera:
@@ -180,7 +181,7 @@ Permite:
 
 * Modelado Dimensional
 * Slowly Changing Dimensions (SCD Tipo 2)
-* Arquitectura por capas (Raw → Staging → DW)
+* Arquitectura por capas (`RAW` → `STAGING` → `DATA WAREHOUSE`)
 * Optimización con índices compuestos
 
 ### 📂 Estructura del Repositorio
