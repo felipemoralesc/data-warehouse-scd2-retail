@@ -46,7 +46,7 @@ GROUP BY
 
 ---
 
-### 3. Consideraciones de Indexación
+## 3. Consideraciones de Indexación
 
 El modelo del Data Warehouse ya incorpora indexación estratégica
 sobre las claves foráneas de la tabla de hechos y sobre columnas
