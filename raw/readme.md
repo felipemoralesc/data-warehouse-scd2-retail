@@ -54,7 +54,7 @@ AUTHORIZATION postgres;
 
 * Archivo: 02_create_raw_tables.sql
 
-Se crea las señales tablas:
+Se crean las siguientes tablas:
 * raw.clientes_csv
 * raw.productos_csv
 * raw.ventas_csv
