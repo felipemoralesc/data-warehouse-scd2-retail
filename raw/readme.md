@@ -13,7 +13,8 @@ Esta capa:
 * Es la representación más cercana al sistema origen.
 
 ### 🏗 Estructura de la alfombra
-```texto/raw
+```texto
+/raw
  /data
   clientes.csv
   productos.csv
