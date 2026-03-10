@@ -24,7 +24,7 @@ dw/
 │   05_load_dim_producto_scd2.sql
 │   06_load_fact_ventas.sql
 │
-├── scripts/
+├── script/
 │   script_para_cargar_dim_fecha.py
 │
 └── README.md
