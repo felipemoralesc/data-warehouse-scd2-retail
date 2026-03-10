@@ -12,7 +12,7 @@ Esta capa:
 * No contiene lógica de negocio
 * Es la representación más cercana al sistema origen.
 
-### 🏗 Estructura de la alfombra
+### 🏗 Estructura de la carpeta
 ```texto
 /raw
  /data
