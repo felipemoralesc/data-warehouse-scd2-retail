@@ -70,13 +70,11 @@ EXPLAIN ANALYZE
 
 Se observaron principalmente los siguientes componentes:
 
-Seq Scan en la tabla de hechos para agregaciones completas
+- `Seq Scan` en la tabla de hechos para agregaciones completas
+- `Hash Join` entre tabla de hechos y dimensiones
+- `HashAggregate` para operaciones de agrupación
+- `Sort` para ordenamiento de resultados
 
-Hash Join entre tabla de hechos y dimensiones
-
-HashAggregate para operaciones de agrupación
-
-Sort para ordenamiento de resultados
 
 En consultas que procesan grandes porciones de la tabla, PostgreSQL prefiere Seq Scan, ya que el dataset (~100k registros) es relativamente pequeño.
 
