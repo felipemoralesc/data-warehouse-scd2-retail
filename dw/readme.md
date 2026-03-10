@@ -193,10 +193,6 @@ Soporte eficiente para consultas históricas SCD2
 **6️⃣ Poblar tabla de hechos**
 
 
-Nota:
-Actualmente en el proyecto solo se ha implementado la estructura del Data Warehouse.
-La carga de dimensiones y de la tabla de hechos se realizará en fases posteriores del proyecto.
-
 ### 🎯 Objetivo de la capa DW
 
 * Optimizar consultas analíticas
