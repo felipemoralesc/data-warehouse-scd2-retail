@@ -2,7 +2,7 @@
 
 ### 🎯 Objetivo
 
-La capa raw simula el sistema transaccional de una empresa retail y almacena los data en su estado original dentro del esquema raw en PostgreSQL.
+La capa RAW simula el sistema transaccional de una empresa retail y almacena los datos en su estado original dentro del esquema raw en PostgreSQL.
 
 Esta capa:
 * Réplica de los archivos CSV fuente
