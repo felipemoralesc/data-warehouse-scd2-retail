@@ -16,14 +16,16 @@ Esta capa incluye:
 **🗂 Estructura de la carpeta**
 ```text
 dw/
-│
 ├── sql/
-│   ├── 01_create_dw_schema.sql
-│   ├── 02_create_dw_tables.sql
-│   └── 03_create_dw_indexes.sql
+│   01_create_dw_schema.sql
+│   02_create_dw_tables.sql
+│   03_create_dw_indexes.sql
+│   04_load_dim_cliente_scd2.sql
+│   05_load_dim_producto_scd2.sql
+│   06_load_fact_ventas.sql
 │
-├── script/
-│   └── script_para_cargar_dim_fecha.py
+├── scripts/
+│   script_para_cargar_dim_fecha.py
 │
 └── README.md
 ```
@@ -99,8 +101,8 @@ Se implementan índices compuestos para optimizar:
 
 Ejemplo conceptual:
 
-* (id_cliente_natural, es_actual)
-* (id_producto_natural, es_actual)
+* (cliente_id, es_actual)
+* (producto_id, es_actual)
 
 Optimiza consultas del tipo:
 ```text
@@ -151,14 +153,13 @@ Utiliza:
 El diseño implementado corresponde a un Modelo Estrella (Star Schema):
 ```text
                 dim_cliente
-                      |
-                      |
+                     |
+                     |
 dim_fecha ---- fact_ventas_detalle ---- dim_producto
 ```
 **🔁 SCD (Slowly Changing Dimension)**
 
-Las dimensiones dim_cliente y dim_producto pueden implementar estrategia SCD Tipo 2 para mantener historial de cambios.
-
+Las dimensiones dim_cliente y dim_producto implementan la estrategia SCD Tipo 2 para mantener historial de cambios.
 Esto permite:
 
 * Preservar versiones históricas
