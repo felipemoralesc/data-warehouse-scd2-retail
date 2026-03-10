@@ -199,10 +199,14 @@ data-warehouse-scd2-retail/
 │
 ├── dw/
 │   ├── sql/
-│   ├── scripts/
+│   ├── script/
 │   └── README.md
 │
 ├── docs/
+│   ├── performance_testing.md
+│   ├──star_schema.png
+│   ├──calidacion_scd2_dim_cliente.md
+│
 ├── .gitignore
 ├── requirements.txt
 └── README.md
