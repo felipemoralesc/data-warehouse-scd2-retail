@@ -58,3 +58,33 @@ de las consultas utilizando `EXPLAIN ANALYZE` para analizar el
 plan de ejecución y el uso de estos índices.
 
 
+## 4. Análisis del Execution Plan
+
+Los planes de ejecución fueron analizados utilizando:
+
+EXPLAIN ANALYZE
+
+Se observaron principalmente los siguientes componentes:
+
+Seq Scan en la tabla de hechos para agregaciones completas
+
+Hash Join entre tabla de hechos y dimensiones
+
+HashAggregate para operaciones de agrupación
+
+Sort para ordenamiento de resultados
+
+En consultas que procesan grandes porciones de la tabla, PostgreSQL prefiere Seq Scan, ya que el dataset (~100k registros) es relativamente pequeño.
+
+
+## 5. Resultados
+
+Las pruebas realizadas permitieron validar que:
+
+El modelo estrella soporta correctamente consultas analíticas.
+
+Los joins entre tabla de hechos y dimensiones funcionan de forma eficiente.
+
+Los índices están correctamente implementados.
+
+El Data Warehouse responde adecuadamente a consultas analíticas típicas.
