@@ -43,3 +43,18 @@ JOIN dw.dim_fecha df
 GROUP BY
     df.anio,
     df.mes;
+
+## 3. Consideraciones de Indexación
+
+El modelo del Data Warehouse ya incorpora indexación estratégica
+sobre las claves foráneas de la tabla de hechos y sobre columnas
+utilizadas en consultas analíticas.
+
+La definición completa de los índices puede consultarse en la
+documentación principal del proyecto.
+
+Durante las pruebas de performance se verificó el comportamiento
+de las consultas utilizando `EXPLAIN ANALYZE` para analizar el
+plan de ejecución y el uso de estos índices.
+
+
