@@ -46,7 +46,7 @@ GROUP BY
 
 ---
 
-## 3. Consideraciones de Indexación
+### 3. Consideraciones de Indexación
 
 El modelo del Data Warehouse ya incorpora indexación estratégica
 sobre las claves foráneas de la tabla de hechos y sobre columnas
@@ -79,7 +79,7 @@ Sort para ordenamiento de resultados
 En consultas que procesan grandes porciones de la tabla, PostgreSQL prefiere Seq Scan, ya que el dataset (~100k registros) es relativamente pequeño.
 
 
-## 5. Resultados
+### 5. Resultados
 
 Las pruebas realizadas permitieron validar que:
 
