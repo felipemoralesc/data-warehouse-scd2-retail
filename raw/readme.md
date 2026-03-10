@@ -7,7 +7,7 @@ La capa raw simula el sistema transaccional de una empresa retail y almacena los
 Esta capa:
 * Réplica de los archivos CSV fuente
 * Sin aplicar transformaciones
-* No se definen hojas primarias ni foráneas
+* No se definen claves primarias ni foráneas
 * No se realiza tipado estricto
 * No contiene lógica de negocio
 * Es la representación más cercana al sistema origen.
